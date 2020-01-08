@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AutorViewDlg" widgetVar="AutorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAutorTitle}">
+            <h:form id="AutorViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{autorController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAutorLabel_idAutor}"/>
+                        <h:outputText value="#{autorController.selected.idAutor}" title="#{bundle.ViewAutorTitle_idAutor}"/>
+                        <h:outputText value="#{bundle.ViewAutorLabel_nombreAutor}"/>
+                        <h:outputText value="#{autorController.selected.nombreAutor}" title="#{bundle.ViewAutorTitle_nombreAutor}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AutorViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

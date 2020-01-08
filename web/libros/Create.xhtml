@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LibrosCreateDlg" widgetVar="LibrosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateLibrosTitle}">
+            <h:form id="LibrosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{librosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateLibrosLabel_idLibros}" for="idLibros" />
+                        <p:inputText id="idLibros" value="#{librosController.selected.idLibros}" title="#{bundle.CreateLibrosTitle_idLibros}" required="true" requiredMessage="#{bundle.CreateLibrosRequiredMessage_idLibros}"/>
+                        <p:outputLabel value="#{bundle.CreateLibrosLabel_codigoLibro}" for="codigoLibro" />
+                        <p:inputText id="codigoLibro" value="#{librosController.selected.codigoLibro}" title="#{bundle.CreateLibrosTitle_codigoLibro}" />
+                        <p:outputLabel value="#{bundle.CreateLibrosLabel_nombreLibro}" for="nombreLibro" />
+                        <p:inputText id="nombreLibro" value="#{librosController.selected.nombreLibro}" title="#{bundle.CreateLibrosTitle_nombreLibro}" />
+                        <p:outputLabel value="#{bundle.CreateLibrosLabel_prestado}" for="prestado" />
+                        <p:selectBooleanCheckbox id="prestado" value="#{librosController.selected.prestado}" />
+                        <p:outputLabel value="#{bundle.CreateLibrosLabel_autorIdAutor}" for="autorIdAutor" />
+                        <p:selectOneMenu id="autorIdAutor" value="#{librosController.selected.autorIdAutor}" required="true" requiredMessage="#{bundle.EditLibrosRequiredMessage_autorIdAutor}">
+                            <f:selectItems value="#{autorController.itemsAvailableSelectOne}"
+                                           var="autorIdAutorItem"
+                                           itemValue="#{autorIdAutorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLibrosLabel_categoriaIdCategoria}" for="categoriaIdCategoria" />
+                        <p:selectOneMenu id="categoriaIdCategoria" value="#{librosController.selected.categoriaIdCategoria}" required="true" requiredMessage="#{bundle.EditLibrosRequiredMessage_categoriaIdCategoria}">
+                            <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"
+                                           var="categoriaIdCategoriaItem"
+                                           itemValue="#{categoriaIdCategoriaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLibrosLabel_editorialIdEditorial}" for="editorialIdEditorial" />
+                        <p:selectOneMenu id="editorialIdEditorial" value="#{librosController.selected.editorialIdEditorial}" required="true" requiredMessage="#{bundle.EditLibrosRequiredMessage_editorialIdEditorial}">
+                            <f:selectItems value="#{editorialController.itemsAvailableSelectOne}"
+                                           var="editorialIdEditorialItem"
+                                           itemValue="#{editorialIdEditorialItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{librosController.create}" value="#{bundle.Save}" update="display,:LibrosListForm:datalist,:growl" oncomplete="handleSubmit(args,'LibrosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LibrosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

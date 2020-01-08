@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EditorialEditDlg" widgetVar="EditorialEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEditorialTitle}">
+            <h:form id="EditorialEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{editorialController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEditorialLabel_idEditorial}" for="idEditorial" />
+                        <p:inputText id="idEditorial" value="#{editorialController.selected.idEditorial}" title="#{bundle.EditEditorialTitle_idEditorial}" required="true" requiredMessage="#{bundle.EditEditorialRequiredMessage_idEditorial}"/>
+                        <p:outputLabel value="#{bundle.EditEditorialLabel_nombreEditorial}" for="nombreEditorial" />
+                        <p:inputText id="nombreEditorial" value="#{editorialController.selected.nombreEditorial}" title="#{bundle.EditEditorialTitle_nombreEditorial}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{editorialController.update}" value="#{bundle.Save}" update="display,:EditorialListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EditorialEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EditorialEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
